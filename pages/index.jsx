@@ -1,27 +1,33 @@
-import { useState } from 'react'
-import Header from '../components/Header'
-import OrganeList from '../components/OrganeList'
-import SystemeList from '../components/SystemeList'
-import styles from '../styles/Home.module.scss'
+import { useContext, useState } from 'react';
+import Header from '../components/Header';
+import OrganeList from '../components/OrganeList';
+import SystemeList from '../components/SystemeSelect';
+import Container from '@mui/material/Container';
+import styles from '../styles/Home.module.scss';
+import { SystemeContext } from '../store/contextSysteme';
+import { MainContext } from '../store/contextMain';
+import Link from 'next/link';
 
 const Home = () => {
-  const [tab, setTab] = useState("")
-  const handleTab = (value) => {
-    setTab(value)
-  }
+  const { tab, handleTab } = useContext(MainContext);
   return (
-    <>
-      <Header />
-      <div style={{ textAlign: "center", marginTop: 40 }}>
-        <button onClick={() => handleTab("systeme")}>Systeme</button>
-        <button onClick={() => handleTab("organe")}>Organe</button>
-        <button onClick={() => handleTab("maladie")}>Maladie</button>
-        <button onClick={() => handleTab("traitement")}>Traitement</button>
+    <Container maxWidth="lg">
+      <div style={{ display: 'flex', marginTop: 40, justifyContent: 'center' }}>
+        <Link href="/systeme-list">
+          <p className={styles.tab}>Systeme</p>
+        </Link>
+        <Link href="/organe">
+          <p className={styles.tab}>Organe</p>
+        </Link>
+        <Link href="/maladie">
+          <p className={styles.tab}>Maladie</p>
+        </Link>
+        <Link href="/traitement">
+          <p className={styles.tab}>Traitement</p>
+        </Link>
       </div>
-      {tab === "systeme" && <SystemeList />}
-      {tab === "organe" && <OrganeList />}
-    </>
-  )
-}
+    </Container>
+  );
+};
 
-export default Home
+export default Home;
