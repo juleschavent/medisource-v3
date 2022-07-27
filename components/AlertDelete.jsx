@@ -8,11 +8,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useRouter } from 'next/router';
 import { server } from '../config';
 
-export default function AlertDelete({ deleteAlerte, setDeleteAlerte, id }) {
+export default function AlertDelete({
+  route,
+  deleteAlerte,
+  setDeleteAlerte,
+  id
+}) {
   const router = useRouter();
   const handleDelete = async (e) => {
     e.preventDefault();
-    await fetch(`${server}/api/systeme/${id}`, {
+    await fetch(`${server}/api/${route}/${id}`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: {
