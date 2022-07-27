@@ -18,7 +18,7 @@ const Home = () => {
         <Link href="/organe-list">
           <p className={styles.tab}>Organe</p>
         </Link>
-        <Link href="/maladie">
+        <Link href="/maladie-list">
           <p className={styles.tab}>Maladie</p>
         </Link>
         <Link href="/traitement">
