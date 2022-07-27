@@ -4,7 +4,6 @@ import { MenuItem, Select } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const OrganeList = ({ data }) => {
-  console.log(data);
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
