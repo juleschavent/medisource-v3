@@ -31,6 +31,7 @@ const Systeme = ({ data: temp, id }) => {
         </Button>
       </div>
       <AlertDelete
+        route="systeme"
         deleteAlerte={deleteAlerte}
         setDeleteAlerte={setDeleteAlerte}
         id={id}
