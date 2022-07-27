@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import Header from '../components/Header';
 import OrganeList from '../components/OrganeList';
-import SystemeList from '../components/SystemeSelect';
 import Container from '@mui/material/Container';
 import styles from '../styles/Home.module.scss';
 import { SystemeContext } from '../store/contextSysteme';
@@ -16,7 +15,7 @@ const Home = () => {
         <Link href="/systeme-list">
           <p className={styles.tab}>Systeme</p>
         </Link>
-        <Link href="/organe">
+        <Link href="/organe-list">
           <p className={styles.tab}>Organe</p>
         </Link>
         <Link href="/maladie">
