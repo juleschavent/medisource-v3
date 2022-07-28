@@ -48,3 +48,8 @@ export default async function handler(req, res) {
     }
   }
 }
+
+// OLD READ
+// SELECT * FROM organe
+// INNER JOIN systeme ON systeme.id_systeme = organe.systeme_organe
+// WHERE id_organe = ?

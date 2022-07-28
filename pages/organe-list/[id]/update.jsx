@@ -59,7 +59,7 @@ export default function SystemeUpdate({ data: temp }) {
           </MenuItem>
         ))}
       </Select>
-      <ReactQuill value={desc} onChange={setDesc} />
+      <ReactQuill preserveWhitespace value={desc} onChange={setDesc} />
       <Button onClick={handleUpdate}>Save</Button>
       <Button onClick={() => router.back()} color="warning">
         Cancel

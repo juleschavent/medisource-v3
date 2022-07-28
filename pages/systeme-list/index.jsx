@@ -1,9 +1,3 @@
-import { useContext, useState } from 'react';
-import Header from '../../components/Header';
-import OrganeList from '../../components/OrganeList';
-import Container from '@mui/material/Container';
-import { SystemeContext } from '../../store/contextSysteme';
-import { MainContext } from '../../store/contextMain';
 import { server } from '../../config';
 import Link from 'next/link';
 import { MenuItem, Select } from '@mui/material';

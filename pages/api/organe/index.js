@@ -8,8 +8,6 @@ export default async function handler(req, res) {
       const result = await excuteQuery({
         query: 'SELECT * FROM `organe`'
       });
-      console.log(result);
-
       res.status(200).json(result);
     } catch (error) {
       res.status(404).json(error);

@@ -36,7 +36,7 @@ export default function SystemeUpdate({ data: temp }) {
   return (
     <div>
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <ReactQuill value={desc} onChange={setDesc} />
+      <ReactQuill preserveWhitespace value={desc} onChange={setDesc} />
       <Button onClick={handleUpdate}>Save</Button>
       <Button onClick={() => router.back()} color="warning">
         Cancel

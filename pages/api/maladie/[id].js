@@ -33,13 +33,14 @@ export default async function handler(req, res) {
 
   // UPDATE SELECTED SYSTEME
   else if (req.method === 'PUT') {
-    const { name, desc, image, systeme } = req.body.newData;
+    const { name, desc, image } = req.body.newData;
     const id = req.query.id;
+    const query =
+      'UPDATE `maladie` SET `id_maladie`= ?,`name_maladie`= ?,`desc_maladie`= ?,`image_maladie`= ? WHERE id_maladie = ?';
     try {
       const result = await excuteQuery({
-        query:
-          'UPDATE `maladie` SET `id_maladie`= ?,`name_maladie`= ?,`desc_maladie`= ?,`image_maladie`= ?, systeme_maladie = ? WHERE id_maladie = ?',
-        values: [id, name, desc, image, systeme, id]
+        query,
+        values: [id, name, desc, image, id]
       });
       res.status(200).json(result);
     } catch (error) {
@@ -47,3 +48,21 @@ export default async function handler(req, res) {
     }
   }
 }
+
+// OLD READ
+// SELECT * FROM maladie
+// WHERE id_maladie = ?
+
+//temp
+// SELECT * FROM traitement
+// INNER JOIN traitement_has_maladie
+// INNER JOIN maladie ON maladie.id_maladie = traitement_has_maladie.traitement_maladie
+// WHERE id_maladie = 1
+
+//TEMP
+// SELECT * FROM maladie
+// INNER JOIN maladie_has_organe
+// INNER JOIN organe ON organe.id_organe = maladie_has_organe.organe_maladie
+// INNER JOIN traitement_has_maladie
+// INNER JOIN traitement ON traitement.id_traitement = traitement_has_maladie.traitement_maladie
+// WHERE id_maladie = 1
