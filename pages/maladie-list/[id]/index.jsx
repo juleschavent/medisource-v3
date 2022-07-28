@@ -1,23 +1,44 @@
-import { server } from '../../../config';
 import EditIcon from '@mui/icons-material/Edit';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AlertDelete from '../../../components/AlertDelete';
+import { server } from '../../../config';
 
-const Systeme = ({ data: temp, id }) => {
-  const data = temp[0];
-
-  console.log(data);
-
+const Systeme = ({ data: req, id }) => {
+  const data = req[0];
   const [deleteAlerte, setDeleteAlerte] = useState();
+  const [linkOrgane, setLinkOrgane] = useState();
+  const [linkTraitement, setLinkTraitement] = useState();
 
+  useEffect(() => {
+    fetch(`${server}/api/maladie-has-organe/${id}`)
+      .then((res) => res.json())
+      .then((data) => setLinkOrgane(data));
+    fetch(`${server}/api/traitement-has-maladie/${id}`)
+      .then((res) => res.json())
+      .then((data) => setLinkTraitement(data));
+  }, []);
   return (
     <>
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h2>{data?.name_maladie}</h2>
+          <p>Organes liés :</p>
+          <ul>
+            {linkOrgane?.map((organe) => (
+              <li key={organe.name_organe}>{organe.name_organe}</li>
+            ))}
+          </ul>
+          <p>Traitements liés :</p>
+          <ul>
+            {linkTraitement?.map((traitement) => (
+              <li key={traitement.name_traitement}>
+                {traitement.name_traitement}
+              </li>
+            ))}
+          </ul>
           <Link href={`/maladie-list/${id}/update`}>
             <EditIcon />
           </Link>
