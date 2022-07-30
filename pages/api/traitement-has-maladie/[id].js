@@ -35,11 +35,10 @@ export default async function handler(req, res) {
     try {
       const id = req.query.id;
       const result = await excuteQuery({
-        query: `SELECT * FROM maladie
-        INNER JOIN traitement_has_maladie
-        INNER JOIN traitement ON traitement.id_traitement = traitement_has_maladie.traitement_maladie
-        WHERE id_maladie = ?`,
-        values: [id]
+        query: `SELECT * FROM traitement_has_maladie
+                INNER JOIN traitement ON traitement_has_maladie.traitement_maladie = traitement.id_traitement
+                WHERE traitement_has_maladie.maladie_traitement =  ?`,
+        values: id
       });
       res.status(200).json(result);
     } catch (error) {
@@ -47,3 +46,23 @@ export default async function handler(req, res) {
     }
   }
 }
+
+// idea 1
+// SELECT * FROM organe
+// INNER JOIN maladie_has_organe ON organe.id_organe = maladie_has_organe.organe_maladie
+// WHERE organe.id_organe = 1
+
+// BONNE PISTE
+// SELECT * FROM maladie_has_organe
+// INNER JOIN organe ON maladie_has_organe.organe_maladie = organe.id_organe
+// WHERE maladie_has_organe.maladie_organe = 2
+
+// OK ?
+// SELECT * FROM traitement_has_maladie
+// INNER JOIN traitement ON traitement_has_maladie.maladie_traitement = traitement.id_traitement
+// WHERE traitement_has_maladie.traitement_maladie = 2
+
+// ok 2 ?
+// SELECT * FROM traitement_has_maladie
+// INNER JOIN traitement ON traitement_has_maladie.traitement_maladie = traitement.id_traitement
+// WHERE traitement_has_maladie.maladie_traitement =  2

@@ -34,11 +34,10 @@ export default async function handler(req, res) {
     try {
       const id = req.query.id;
       const result = await excuteQuery({
-        query: `SELECT * FROM maladie
-        INNER JOIN maladie_has_organe
-        INNER JOIN organe ON organe.id_organe = maladie_has_organe.organe_maladie
-        WHERE id_maladie = ?`,
-        values: [id]
+        query: `SELECT * FROM organe
+                INNER JOIN maladie_has_organe on maladie_has_organe.organe_maladie = organe.id_organe
+                WHERE maladie_has_organe.maladie_organe = ?`,
+        values: id
       });
       res.status(200).json(result);
     } catch (error) {
@@ -46,3 +45,8 @@ export default async function handler(req, res) {
     }
   }
 }
+
+// maybe ?
+// SELECT * FROM organe
+// INNER JOIN maladie_has_organe on maladie_has_organe.organe_maladie = organe.id_organe
+// WHERE maladie_has_organe.maladie_organe = 1

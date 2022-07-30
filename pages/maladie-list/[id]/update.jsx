@@ -47,18 +47,23 @@ export default function SystemeUpdate({ data: temp }) {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => {
-      response.ok ? router.back() : console.log('error');
     });
+    // TODO DELETE ALL THE THEN
+    // .then((response) => {
+    //   response.ok
+    //     ? console.log('updated maladie')
+    //     : console.log('error update maladie');
+    // });
 
     // DELETE ALL RELATION WITH ORGANE
     await fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`, {
       method: 'DELETE'
-    }).then((response) => {
-      response.ok
-        ? console.log('success: delete maladie relations')
-        : console.log('error: delete maladie relations');
     });
+    // .then((response) => {
+    //   response.ok
+    //     ? console.log('deleted maladie relations')
+    //     : console.log('error: delete maladie relations');
+    // });
 
     // CREATE NEW UPDATED ORGANE RELATION
     hasOrgane.forEach(async (organe) => {
@@ -72,19 +77,23 @@ export default function SystemeUpdate({ data: temp }) {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then((response) => {
-        response.ok ? router.back() : console.log('error');
       });
+      // .then((response) => {
+      //   response.ok
+      //     ? console.log('create organe relation')
+      //     : console.log('error');
+      // });
     });
 
     // DELETE ALL RELATION WITH TRAITEMENT
     await fetch(`${server}/api/traitement-has-maladie/${data.id_maladie}`, {
       method: 'DELETE'
-    }).then((response) => {
-      response.ok
-        ? console.log('success: delete traitement relations')
-        : console.log('error: delete traitement relations');
     });
+    // .then((response) => {
+    //   response.ok
+    //     ? console.log('success: deleted traitement relations')
+    //     : console.log('error: delete traitement relations');
+    // });
 
     // CREATE NEW UPDATED TRAITEMENT RELATION
     hasTraitement.forEach(async (traitement) => {
@@ -98,10 +107,14 @@ export default function SystemeUpdate({ data: temp }) {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then((response) => {
-        response.ok ? router.back() : console.log('error');
       });
+      // .then((response) => {
+      //   response.ok
+      //     ? console.log('create traitement relation')
+      //     : console.log('error');
+      // });
     });
+    router.back();
   };
 
   return (
