@@ -9,7 +9,7 @@ import AlertDelete from '../../../components/AlertDelete';
 const Systeme = ({ data: temp, id }) => {
   const data = temp[0];
 
-  const [deleteAlerte, setDeleteAlerte] = useState();
+  const [deleteAlerte, setDeleteAlerte] = useState(false);
 
   return (
     <>

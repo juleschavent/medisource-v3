@@ -8,7 +8,7 @@ import { server } from '../../../config';
 
 const Systeme = ({ data: req, id }) => {
   const data = req[0];
-  const [deleteAlerte, setDeleteAlerte] = useState();
+  const [deleteAlerte, setDeleteAlerte] = useState(false);
   const [linkOrgane, setLinkOrgane] = useState();
   const [linkTraitement, setLinkTraitement] = useState();
 
@@ -20,6 +20,7 @@ const Systeme = ({ data: req, id }) => {
       .then((res) => res.json())
       .then((data) => setLinkTraitement(data));
   }, []);
+
   return (
     <>
       <div>

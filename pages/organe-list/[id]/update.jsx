@@ -16,9 +16,6 @@ export default function SystemeUpdate({ data: temp }) {
   const [image, setImage] = useState(data?.image_organe);
   const [systeme, setSysteme] = useState(data?.systeme_organe);
   const [systemeList, setSystemeList] = useState();
-
-  console.log(data.systeme_organe);
-
   useEffect(() => {
     fetch(`${server}/api/systeme`)
       .then((res) => res.json())
