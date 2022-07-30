@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     try {
       const result = await excuteQuery({
         query:
-          'INSERT INTO `organe`(`id_organe`, `name_organe`, `desc_organe`, `image_organe`, systeme_organe) VALUES ("", ?, ?, ?, ?)',
+          'INSERT INTO `organe`(`name_organe`, `desc_organe`, `image_organe`, systeme_organe) VALUES (?, ?, ?, ?)',
         values: [name, desc, image, systeme]
       });
       res.status(200).json(result);
