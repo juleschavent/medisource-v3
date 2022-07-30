@@ -7,8 +7,8 @@ export default async function handler(req, res) {
     try {
       const id = req.query.id;
       const result = await excuteQuery({
-        query: `SELECT * FROM maladie
-                WHERE id_maladie = ?`,
+        query: `SELECT * FROM traitement
+                WHERE id_traitement = ?`,
         values: id
       });
       res.status(200).json(result);
