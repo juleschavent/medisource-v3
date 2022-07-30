@@ -1,10 +1,11 @@
 import mysql from 'serverless-mysql';
 const db = mysql({
   config: {
-    host: "localhost",
-    database: "medisource-v3",
-    user: "admin",
-    password: "admin",
+    host: 'localhost',
+    database: 'medisource',
+    user: 'admin',
+    password: 'admin',
+    port: 8889
   }
 });
 
