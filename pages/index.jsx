@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 
 const Home = () => {
+  console.log(process.env.DB_HOST);
   return (
     <Container maxWidth="lg">
       <div style={{ display: 'flex', marginTop: 40, justifyContent: 'center' }}>
