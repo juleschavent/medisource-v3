@@ -10,22 +10,22 @@ const Systeme = ({ data: req, id }) => {
   const data = req[0];
   const [deleteAlerte, setDeleteAlerte] = useState(false);
   const [linkOrgane, setLinkOrgane] = useState();
-  const [linkTraitement, setLinkTraitement] = useState();
+  const [linkMaladie, setLinkMaladie] = useState();
 
   useEffect(() => {
-    fetch(`${server}/api/maladie-has-organe/${id}`)
-      .then((res) => res.json())
-      .then((data) => setLinkOrgane(data));
     fetch(`${server}/api/traitement-has-maladie/${id}`)
       .then((res) => res.json())
-      .then((data) => setLinkTraitement(data));
+      .then((data) => setLinkOrgane(data));
+    fetch(`${server}/api/maladie-has-organe/${id}`)
+      .then((res) => res.json())
+      .then((data) => setLinkMaladie(data));
   }, []);
 
   return (
     <>
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <h2>{data?.name_maladie}</h2>
+          <h2>{data?.name_traitement}</h2>
           <p>Organes liés :</p>
           <ul>
             {linkOrgane?.map((organe) => (
@@ -34,17 +34,17 @@ const Systeme = ({ data: req, id }) => {
           </ul>
           <p>Traitements liés :</p>
           <ul>
-            {linkTraitement?.map((traitement) => (
-              <li key={traitement.name_traitement}>
-                {traitement.name_traitement}
+            {linkMaladie?.map((maladie) => (
+              <li key={maladie.name_maladie}>
+                {maladie.name_maladie}
               </li>
             ))}
           </ul>
-          <Link href={`/maladie-list/${id}/update`}>
+          <Link href={`/traitement-list/${id}/update`}>
             <EditIcon />
           </Link>
         </div>
-        <p dangerouslySetInnerHTML={{ __html: data?.desc_maladie }} />
+        <p dangerouslySetInnerHTML={{ __html: data?.desc_traitement }} />
         <Button
           color="error"
           variant="contained"
@@ -55,7 +55,7 @@ const Systeme = ({ data: req, id }) => {
         </Button>
       </div>
       <AlertDelete
-        route="maladie"
+        route="traitement"
         deleteAlerte={deleteAlerte}
         setDeleteAlerte={setDeleteAlerte}
         id={id}
@@ -68,7 +68,7 @@ export default Systeme;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const res = await fetch(`${server}/api/maladie/${id}`);
+  const res = await fetch(`${server}/api/traitement/${id}`);
   const data = await res.json();
 
   if (!data) {

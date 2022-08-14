@@ -2,6 +2,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+// import ReactQuill from 'react-quill';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import { server } from '../../../config';
@@ -36,7 +37,8 @@ export default function SystemeUpdate({ data: temp }) {
   return (
     <div>
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <ReactQuill preserveWhitespace value={desc} onChange={setDesc} />
+      {/* <ReactQuill preserveWhitespace value={desc} onChange={setDesc} theme="snow" /> */}
+      <ReactQuill value={desc} onChange={setDesc} theme="snow" />
       <Button onClick={handleUpdate}>Save</Button>
       <Button onClick={() => router.back()} color="warning">
         Cancel
