@@ -14,11 +14,6 @@ a {
   box-sizing: border-box;
 }
 
-// Hide a second toolbar on text editor, dirty fix
-.quill>.ql-toolbar:first-child {
-  display: none !important;
-}
-
 section {
   padding: 50px 0;
   background-color: rgb(138, 208, 255);
