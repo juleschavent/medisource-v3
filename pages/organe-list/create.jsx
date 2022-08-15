@@ -36,9 +36,10 @@ const CreateOrgane = () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => {
-      response.ok ? router.back() : console.log('error');
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => router.push(`/organe-list/${data.insertId}`))
+      .catch((err) => console.log(err))
   };
 
   return (

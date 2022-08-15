@@ -29,7 +29,7 @@ const CreateSysteme = () => {
     })
       .then((response) => response.json())
       .then((data) => router.push(`/systeme-list/${data.insertId}`))
-      .catch((err) => console.log('error'));
+      .catch((err) => console.log(err));
   };
 
   return (

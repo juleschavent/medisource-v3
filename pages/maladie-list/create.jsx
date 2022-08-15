@@ -92,6 +92,9 @@ const CreateOrgane = () => {
                   : console.log('error');
               })
             })
+            setTimeout(() => {
+              router.push(`/maladie-list/${data[0].id_maladie}`)
+            }, 1000)
           })
       )
   };
