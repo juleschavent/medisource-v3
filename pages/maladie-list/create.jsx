@@ -23,10 +23,10 @@ const CreateOrgane = () => {
   useEffect(() => {
     fetch(`${server}/api/organe`)
       .then((res) => res.json())
-      .then((data) => setOrganeList(data));
+      .then((data) => setOrganeList(data))
     fetch(`${server}/api/traitement`)
       .then((res) => res.json())
-      .then((data) => setTraitementList(data));
+      .then((data) => setTraitementList(data))
   }, []);
 
   const handleUpdate = async (e) => {
@@ -36,7 +36,6 @@ const CreateOrgane = () => {
       desc,
       image
     };
-    let newMaladie;
     await fetch(`${server}/api/maladie`, {
       method: 'POST',
       body: JSON.stringify({ newData }),
@@ -45,21 +44,20 @@ const CreateOrgane = () => {
       }
     })
       .then((response) => {
-        response.ok ? console.log('success') : console.log('error');
+        response.ok ? console.log('success') : console.log('error')
       })
       .then(
         fetch(`${server}/api/new-maladie/${name}`)
           .then((response) => response.json())
-          .then((data) =>
-          console.log(data[0]),
-            // INSERT INTO MALADIE HAS ORGANE
+          .then((data) => {
+            // // INSERT INTO MALADIE HAS ORGANE
             hasOrgane.forEach(async (organe) => {
               const joinData = {
                 maladieId: data[0]?.id_maladie,
                 organeId: organe
               };
               await fetch(
-                `${server}/api/maladie-has-organe/${data.id_maladie}`,
+                `${server}/api/maladie-has-organe/${data[0].id_maladie}`,
                 {
                   method: 'POST',
                   body: JSON.stringify({ joinData }),
@@ -71,83 +69,31 @@ const CreateOrgane = () => {
                 response.ok
                   ? console.log('create organe relation')
                   : console.log('error');
-              });
-            }),
-          )
-      )
-      .then(
-        fetch(`${server}/api/new-maladie/${name}`)
-          .then((response) => response.json())
-          .then((data) =>
-          console.log(data)
+              })
+            })
             // INSERT INTO TRAITEMENT HAS MALADIE
-            // hasTraitement.forEach(async (traitement) => {
-            //   const joinData = {
-            //     maladieId: data[0]?.id_maladie,
-            //     traitementId: traitement
-            //   };
-            //   await fetch(
-            //     `${server}/api/traitement-has-maladie/${data.id_maladie}`,
-            //     {
-            //       method: 'POST',
-            //       body: JSON.stringify({ joinData }),
-            //       headers: {
-            //         'Content-Type': 'application/json'
-            //       }
-            //     }
-            //   ).then((response) => {
-            //     response.ok
-            //       ? console.log('create traitement relation')
-            //       : console.log('error');
-            //   });
-            // })
-          )
+            hasTraitement.forEach(async (traitement) => {
+              const joinData = {
+                maladieId: data[0]?.id_maladie,
+                traitementId: traitement
+              };
+              await fetch(
+                `${server}/api/traitement-has-maladie/${data[0].id_maladie}`,
+                {
+                  method: 'POST',
+                  body: JSON.stringify({ joinData }),
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                }
+              ).then((response) => {
+                response.ok
+                  ? console.log('create traitement relation')
+                  : console.log('error');
+              })
+            })
+          })
       )
-      // .then(
-      //   fetch(`${server}/api/new-maladie/${name}`)
-      //     .then((response) => response.json())
-      //     .then((data) =>
-      //       hasTraitement.forEach(async (traitement) => {
-      //         const joinData = {
-      //           maladieId: data[0].id_maladie,
-      //           traitementId: traitement
-      //         };
-      //         await fetch(
-      //           `${server}/api/traitement-has-maladie/${data.id_maladie}`,
-      //           {
-      //             method: 'POST',
-      //             body: JSON.stringify({ joinData }),
-      //             headers: {
-      //               'Content-Type': 'application/json'
-      //             }
-      //           }
-      //         ).then((response) => {
-      //           response.ok
-      //             ? console.log('create organe relation')
-      //             : console.log('error');
-      //         });
-      //       })
-      //     )
-      // );
-
-    //   // CREATE NEW UPDATED TRAITEMENT RELATION
-    //   hasTraitement.forEach(async (traitement) => {
-    //     const joinData = {
-    //       maladieId: newData.id,
-    //       traitementId: traitement
-    //     };
-    //     await fetch(`${server}/api/traitement-has-maladie/${data.id_maladie}`, {
-    //       method: 'POST',
-    //       body: JSON.stringify({ joinData }),
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     }).then((response) => {
-    //       response.ok
-    //         ? console.log('create traitement relation')
-    //         : console.log('error');
-    //     });
-    //   });
   };
 
   return (
