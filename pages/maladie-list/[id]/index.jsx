@@ -44,7 +44,7 @@ const Systeme = ({ data: req, id }) => {
             <EditIcon />
           </Link>
         </div>
-        <p dangerouslySetInnerHTML={{ __html: data?.desc_maladie }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.desc_maladie }} />
         <Button
           color="error"
           variant="contained"

@@ -20,7 +20,7 @@ const Systeme = ({ data: temp, id }) => {
             <EditIcon />
           </Link>
         </div>
-        <p dangerouslySetInnerHTML={{ __html: data?.desc_systeme }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.desc_systeme }} />
         <Button
           color="error"
           variant="contained"
