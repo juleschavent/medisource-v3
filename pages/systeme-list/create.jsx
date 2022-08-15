@@ -26,9 +26,10 @@ const CreateSysteme = () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => {
-      response.ok ? router.back() : console.log('error');
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => router.push(`/systeme-list/${data.insertId}`))
+      .catch((err) => console.log('error'));
   };
 
   return (
