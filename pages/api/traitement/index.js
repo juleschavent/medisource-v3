@@ -16,12 +16,12 @@ export default async function handler(req, res) {
   }
   // CREATE A NEW SYSTEME
   else if (req.method === 'POST') {
-    const { name, desc, image, systeme } = req.body.newData;
+    const { name, desc, image } = req.body.newData;
     try {
       const result = await excuteQuery({
         query:
-          'INSERT INTO `maladie`(`id_maladie`, `name_maladie`, `desc_maladie`, `image_maladie`, systeme_maladie) VALUES ("", ?, ?, ?, ?)',
-        values: [name, desc, image, systeme]
+          'INSERT INTO `traitement`(`id_traitement`, `name_traitement`, `desc_traitement`, `image_traitement`) VALUES ("", ?, ?, ?)',
+        values: [name, desc, image]
       });
       res.status(200).json(result);
     } catch (error) {

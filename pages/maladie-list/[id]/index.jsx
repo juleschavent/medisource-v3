@@ -16,10 +16,12 @@ const Systeme = ({ data: req, id }) => {
     fetch(`${server}/api/maladie-has-organe/${id}`)
       .then((res) => res.json())
       .then((data) => setLinkOrgane(data));
-    fetch(`${server}/api/traitement-has-maladie/${id}`)
+    fetch(`${server}/api/maladie-has-traitement/${id}`)
       .then((res) => res.json())
       .then((data) => setLinkTraitement(data));
   }, []);
+
+  console.log(linkTraitement);
 
   return (
     <>

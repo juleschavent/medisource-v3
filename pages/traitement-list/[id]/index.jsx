@@ -6,17 +6,13 @@ import { useEffect, useState } from 'react';
 import AlertDelete from '../../../components/AlertDelete';
 import { server } from '../../../config';
 
-const Systeme = ({ data: req, id }) => {
+const Traitement = ({ data: req, id }) => {
   const data = req[0];
   const [deleteAlerte, setDeleteAlerte] = useState(false);
-  const [linkOrgane, setLinkOrgane] = useState();
   const [linkMaladie, setLinkMaladie] = useState();
 
   useEffect(() => {
     fetch(`${server}/api/traitement-has-maladie/${id}`)
-      .then((res) => res.json())
-      .then((data) => setLinkOrgane(data));
-    fetch(`${server}/api/maladie-has-organe/${id}`)
       .then((res) => res.json())
       .then((data) => setLinkMaladie(data));
   }, []);
@@ -26,13 +22,7 @@ const Systeme = ({ data: req, id }) => {
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h2>{data?.name_traitement}</h2>
-          <p>Organes liés :</p>
-          <ul>
-            {linkOrgane?.map((organe) => (
-              <li key={organe.name_organe}>{organe.name_organe}</li>
-            ))}
-          </ul>
-          <p>Traitements liés :</p>
+          <p>Maladies liés :</p>
           <ul>
             {linkMaladie?.map((maladie) => (
               <li key={maladie.name_maladie}>
@@ -64,7 +54,7 @@ const Systeme = ({ data: req, id }) => {
   );
 };
 
-export default Systeme;
+export default Traitement;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;

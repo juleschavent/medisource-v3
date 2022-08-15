@@ -36,8 +36,9 @@ export default async function handler(req, res) {
       const id = req.query.id;
       const result = await excuteQuery({
         query: `SELECT * FROM traitement_has_maladie
+                INNER JOIN traitement ON traitement_has_maladie.traitement_maladie = traitement.id_traitement
                 INNER JOIN maladie ON traitement_has_maladie.maladie_traitement = maladie.id_maladie
-                WHERE traitement_has_maladie.traitement_maladie =  ?
+                WHERE traitement_has_maladie.maladie_traitement =  ?
                 `,
         values: id
       });

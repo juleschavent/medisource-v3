@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { MenuItem, Select } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const OrganeList = ({ data }) => {
+const TraitementList = ({ data }) => {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -29,7 +29,7 @@ const OrganeList = ({ data }) => {
   );
 };
 
-export default OrganeList;
+export default TraitementList;
 
 export async function getServerSideProps(context) {
   const res = await fetch(`${server}/api/traitement`);

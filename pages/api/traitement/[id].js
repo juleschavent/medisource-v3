@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     try {
       const id = req.query.id;
       const result = await excuteQuery({
-        query: 'DELETE FROM `maladie` WHERE id_maladie = ?',
+        query: 'DELETE FROM `traitement` WHERE id_traitement = ?',
         values: id
       });
       res.status(200).json(result);
