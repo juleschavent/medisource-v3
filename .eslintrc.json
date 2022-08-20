@@ -15,7 +15,6 @@
     },
     "plugins": [
         "react",
-        "formatjs"
     ],
     "rules": {
         "react/no-array-index-key": "off",
