@@ -21,8 +21,6 @@ const Systeme = ({ data: req, id }) => {
       .then((data) => setLinkTraitement(data));
   }, []);
 
-  console.log(linkTraitement);
-
   return (
     <>
       <div>

@@ -7,8 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { sortBy } from 'lodash';
 import { server } from '../config';
+import { useOrderByName } from '../lib/UseOrderByName';
 
 export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
   const [tempOrgane, setTempOrgane] = useState([]);
@@ -39,14 +39,8 @@ export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
   }, [tempOrgane, list]);
 
   const orderedList = useMemo(() => (
-    list?.sort((a, b) => {
-      const titleA = a.name_organe.toLowerCase();
-      const titleB = b.name_organe.toLowerCase();
-      if (titleA < titleB) {
-        return -1;
-      }
-      return (titleA > titleB) ? 1 : 0;
-    })), [list])
+    useOrderByName(list, 'name_organe')
+  ), [list])
 
   const handleChange = (event) => {
     const {

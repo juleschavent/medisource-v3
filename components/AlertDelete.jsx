@@ -23,9 +23,10 @@ export default function AlertDelete({
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => {
-      response.ok ? router.back() : console.log('error');
-    });
+    })
+      .then((response) => {
+        response.ok ? router.back() : console.log('error');
+      });
   };
   return (
     <Dialog

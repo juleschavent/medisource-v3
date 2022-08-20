@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { server } from '../config';
+import { useOrderByName } from '../lib/UseOrderByName';
 
 export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
   const [tempMaladie, setTempMaladie] = useState([]);
@@ -38,14 +39,8 @@ export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
   }, [tempMaladie, list]);
 
   const orderedList = useMemo(() => (
-    list?.sort((a, b) => {
-      const titleA = a.name_maladie.toLowerCase();
-      const titleB = b.name_maladie.toLowerCase();
-      if (titleA < titleB) {
-        return -1;
-      }
-      return (titleA > titleB) ? 1 : 0;
-    })), [list])
+    useOrderByName(list, 'name_maladie')
+  ), [list])
 
   const handleChange = (event) => {
     const {

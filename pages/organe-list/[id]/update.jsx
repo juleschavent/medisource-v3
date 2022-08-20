@@ -16,6 +16,7 @@ export default function OrganeUpdate({ data: temp }) {
   const [image, setImage] = useState(data?.image_organe);
   const [systeme, setSysteme] = useState(data?.systeme_organe);
   const [systemeList, setSystemeList] = useState();
+
   useEffect(() => {
     fetch(`${server}/api/systeme`)
       .then((res) => res.json())
@@ -47,7 +48,7 @@ export default function OrganeUpdate({ data: temp }) {
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Select
         label="Systeme"
-        defaultValue={data.systeme_organe}
+        defaultValue={data?.systeme_organe || ""}
         onChange={(e) => setSysteme(e.target.value)}
       >
         {systemeList?.map((systeme) => (

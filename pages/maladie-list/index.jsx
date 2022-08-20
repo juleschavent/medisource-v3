@@ -3,18 +3,14 @@ import Link from 'next/link';
 import { MenuItem, Select } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useMemo } from 'react';
+import { useOrderByName } from '../../lib/UseOrderByName';
 
 const MaladieList = ({ data }) => {
 
   const orderedList = useMemo(() => (
-    data?.sort((a, b) => {
-      const titleA = a.name_maladie.toLowerCase();
-      const titleB = b.name_maladie.toLowerCase();
-      if (titleA < titleB) {
-        return -1;
-      }
-      return (titleA > titleB) ? 1 : 0;
-    })), [data])
+    useOrderByName(data, 'name_maladie')
+  ), [data])
+
 
   return (
     <div>

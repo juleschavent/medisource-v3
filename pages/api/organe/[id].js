@@ -8,10 +8,16 @@ export default async function handler(req, res) {
       const id = req.query.id;
       const result = await excuteQuery({
         query: `SELECT * FROM organe
-                INNER JOIN systeme ON systeme.id_systeme = organe.systeme_organe
                 WHERE id_organe = ?`,
         values: id
       });
+      // const result = await excuteQuery({
+      //   query: `SELECT * FROM organe
+      //           INNER JOIN systeme ON systeme.id_systeme = organe.systeme_organe
+      //           WHERE id_organe = ?`,
+      //   values: id
+      // });
+      console.log(result);
       res.status(200).json(result);
     } catch (error) {
       res.status(404).json(error);
@@ -40,7 +46,7 @@ export default async function handler(req, res) {
       const result = await excuteQuery({
         query:
           'UPDATE `organe` SET `id_organe`= ?,`name_organe`= ?,`desc_organe`= ?,`image_organe`= ?, systeme_organe = ? WHERE id_organe = ?',
-        values: [id, name, desc, image, systeme, id]
+        values: [id, name, desc, image, parseInt(systeme), id]
       });
       res.status(200).json(result);
     } catch (error) {

@@ -13,7 +13,7 @@ const CreateOrgane = () => {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState();
-  const [systeme, setSysteme] = useState('');
+  const [systeme, setSysteme] = useState();
   const [systemeList, setSystemeList] = useState();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const CreateOrgane = () => {
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Select
         label="Systeme"
-        defaultValue="default"
+        // defaultValue="default"
         onChange={(e) => setSysteme(e.target.value)}
       >
         <MenuItem value="default">Selectionner un systeme</MenuItem>

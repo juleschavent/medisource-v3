@@ -25,9 +25,6 @@ export default function SystemeUpdate({ data: temp }) {
     fetch(`${server}/api/organe`)
       .then((res) => res.json())
       .then((data) => setOrganeList(data));
-    // fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`)
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
 
     fetch(`${server}/api/traitement`)
       .then((res) => res.json())

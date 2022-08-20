@@ -3,19 +3,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AlertDelete from '../../../components/AlertDelete';
+import { useMemo } from 'react';
 
-const Systeme = ({ data: temp, id }) => {
+const Organe = ({ data: temp, id }) => {
   const data = temp[0];
   const [deleteAlerte, setDeleteAlerte] = useState(false);
+  const [systeme, setSysteme] = useState();
+
+  useEffect(() => {
+    fetch(`${server}/api/systeme/${data.systeme_organe}`)
+      .then((response) => response.json())
+      .then((res) => setSysteme(res))
+  }, [data])
 
   return (
     <>
       <div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h2>{data?.name_organe}</h2>
-          <p> systeme {data?.name_systeme} </p>
+          {systeme && <p>{systeme[0]?.name_systeme}</p>}
           <Link href={`/organe-list/${id}/update`}>
             <EditIcon />
           </Link>
@@ -40,7 +48,7 @@ const Systeme = ({ data: temp, id }) => {
   );
 };
 
-export default Systeme;
+export default Organe;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;

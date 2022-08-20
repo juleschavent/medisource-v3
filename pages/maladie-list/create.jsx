@@ -43,9 +43,6 @@ const CreateOrgane = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then((response) => {
-        response.ok ? console.log('success') : console.log('error')
-      })
       .then(
         fetch(`${server}/api/new-maladie/${name}`)
           .then((response) => response.json())
@@ -65,11 +62,7 @@ const CreateOrgane = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              ).then((response) => {
-                response.ok
-                  ? console.log('create organe relation')
-                  : console.log('error');
-              })
+              )
             })
             // INSERT INTO TRAITEMENT HAS MALADIE
             hasTraitement.forEach(async (traitement) => {
@@ -86,11 +79,7 @@ const CreateOrgane = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              ).then((response) => {
-                response.ok
-                  ? console.log('create traitement relation')
-                  : console.log('error');
-              })
+              )
             })
             setTimeout(() => {
               router.push(`/maladie-list/${data[0].id_maladie}`)

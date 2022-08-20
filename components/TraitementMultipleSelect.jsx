@@ -6,12 +6,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { server } from '../config';
+import { useOrderByName } from '../lib/UseOrderByName';
 
 export default function TraitementMultipleSelect({ list, setHasTraitement, id }) {
   const [tempTraitement, setTempTraitement] = useState([]);
   const [currTraitement, setCurrTraitement] = useState([]);
-
-  console.log(currTraitement);
 
   useEffect(() => {
     fetch(`${server}/api/maladie-has-traitement/${id}`)
@@ -40,14 +39,8 @@ export default function TraitementMultipleSelect({ list, setHasTraitement, id })
   }, [tempTraitement, list]);
 
   const orderedList = useMemo(() => (
-    list?.sort((a, b) => {
-      const titleA = a.name_traitement.toLowerCase();
-      const titleB = b.name_traitement.toLowerCase();
-      if (titleA < titleB) {
-        return -1;
-      }
-      return (titleA > titleB) ? 1 : 0;
-    })), [list])
+    useOrderByName(list, 'name_traitement')
+  ), [list])
 
   const handleChange = (event) => {
     const {

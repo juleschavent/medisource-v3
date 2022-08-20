@@ -5,11 +5,6 @@ const db = mysql({
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD
-    // TODO CLEAN THIS IF VERCEL CONNEXION WORKS
-    // host: "eu-cdbr-west-03.cleardb.net",
-    // database: "heroku_1b9ee3552ec27d3",
-    // user: "b101febdf1e7c0",
-    // password: "8b81cf40",
   }
 });
 

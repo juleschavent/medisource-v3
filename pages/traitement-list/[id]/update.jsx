@@ -20,8 +20,6 @@ export default function TraitementUpdate({ data: temp }) {
   const [maladieList, setMaladieList] = useState();
   const [hasMaladie, setHasMaladie] = useState([]);
 
-  console.log(data);
-
   useEffect(() => {
     fetch(`${server}/api/maladie`)
       .then((res) => res.json())

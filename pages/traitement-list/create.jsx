@@ -22,7 +22,6 @@ const CreateTraitement = () => {
       .then((data) => setMaladieList(data))
   }, []);
 
-  console.log(name);
   const handleUpdate = async (e) => {
     e.preventDefault();
     const newData = {
@@ -37,9 +36,6 @@ const CreateTraitement = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then((response) => {
-        response.ok ? console.log('success') : console.log('error')
-      })
       .then(
         fetch(`${server}/api/new-traitement/${name}`)
           .then((response) => response.json())
@@ -49,7 +45,6 @@ const CreateTraitement = () => {
                 maladieId: maladie,
                 traitementId: data[0]?.id_traitement
               };
-              console.log(data);
               await fetch(
                 `${server}/api/maladie-has-traitement/${data[0].id_maladie}`,
                 {
@@ -59,11 +54,7 @@ const CreateTraitement = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              ).then((response) => {
-                response.ok
-                  ? console.log('create maladie relation')
-                  : console.log('error');
-              })
+              )
             })
             setTimeout(() => {
               router.push(`/traitement-list/${data[0].id_traitement}`)

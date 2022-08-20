@@ -9,9 +9,5 @@ export async function updateSysteme(data) {
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then((response) => {
-    // response.ok ? console.log('success') : console.log('error');
-    // return response;
-    console.log('res', response);
-  });
+  })
 }
