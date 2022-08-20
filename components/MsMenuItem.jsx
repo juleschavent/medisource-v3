@@ -12,8 +12,8 @@ export const MsMenuItem = ({ children, value }) => {
 
 
   return (
-    <MenuItem value={value} sx={{ fontSize: '1.8rem' }}>
+    <CustomMenuItem value={value} sx={{ fontSize: '1.8rem' }}>
       {children}
-    </MenuItem>
+    </CustomMenuItem>
   )
 }

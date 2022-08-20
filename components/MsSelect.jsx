@@ -38,14 +38,15 @@ export const MsSelect = ({ list, type }) => {
       <CustomSelect value="none">
         <MenuItem value="none" sx={{ fontSize: '1.8rem' }}>{defaultValue}</MenuItem>
         {orderedList?.map((item) => (
-          <Link
-            key={item[`id_${type}`]}
-            href={`/${type}-list/${item[`id_${type}`]}`}
-          >
-            <MenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }}>
+
+          <MsMenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }}>
+            <Link
+              key={item[`id_${type}`]}
+              href={`/${type}-list/${item[`id_${type}`]}`}
+            >
               {item[`name_${type}`]}
-            </MenuItem>
-          </Link>
+            </Link>
+          </MsMenuItem>
         ))}
       </CustomSelect>
       <Link href={`/${type}-list/create`}>
