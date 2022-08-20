@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { useOrderByName } from "../lib/UseOrderByName";
 import { ESelectTypes } from "../lib/types";
 import { basicsColors } from "../pages/assets/colors"
+import { MsMenuItem } from "./MsMenuItem";
 
 const CustomSelect = styled(Select)`
   font-size: 1.8rem;
@@ -35,13 +36,13 @@ export const MsSelect = ({ list, type }) => {
   return (
     <div className='flex items-center mx-auto w-fit-content'>
       <CustomSelect value="none">
-        <MenuItem value="none">{defaultValue}</MenuItem>
+        <MenuItem value="none" sx={{ fontSize: '1.8rem' }}>{defaultValue}</MenuItem>
         {orderedList?.map((item) => (
           <Link
             key={item[`id_${type}`]}
             href={`/${type}-list/${item[`id_${type}`]}`}
           >
-            <MenuItem value={item[`id_${type}`]}>
+            <MenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }}>
               {item[`name_${type}`]}
             </MenuItem>
           </Link>
