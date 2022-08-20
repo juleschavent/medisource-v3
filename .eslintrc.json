@@ -26,7 +26,9 @@
         "no-undef": "off",
         "react/jsx-props-no-spreading": "off",
         "no-shadow": "off",
-        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-shadow": [
+            "error"
+        ],
         "no-unused-vars": "warn",
         "camelcase": "warn",
         "func-call-spacing": "off",
@@ -36,10 +38,22 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-no-useless-fragment": "off",
         "react/function-component-definition": "off",
-        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "react/jsx-filename-extension": [
+            2,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        ],
         "react/button-has-type": "off",
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"],
+        "@typescript-eslint/no-use-before-define": [
+            "error"
+        ],
         "nonblock-statement-body-position": "off",
         "import/extensions": [
             "error",
@@ -53,7 +67,12 @@
         ],
         "import/prefer-default-export": "off",
         "formatjs/no-offset": "error",
-        "max-len": ["warn", { "code": 120 }],
+        "max-len": [
+            "warn",
+            {
+                "code": 120
+            }
+        ],
         "react/destructuring-assignment": "off",
         "react/require-default-props": "off",
         "operator-linebreak": "off",
@@ -63,9 +82,19 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "moduleDirectory": ["node_modules", "app/javascript"],
-                "extensions": [".js", ".jsx", ".ts", ".tsx"],
-                "paths": ["./"]
+                "moduleDirectory": [
+                    "node_modules",
+                    "app/javascript"
+                ],
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ],
+                "paths": [
+                    "./"
+                ]
             }
         }
     }
