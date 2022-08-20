@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './pages/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     // TODO colors from Employee platform, to check

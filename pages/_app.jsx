@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Header />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className='mt-6'>
         <Component {...pageProps} />
       </Container>
     </>

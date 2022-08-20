@@ -13,14 +13,14 @@ const Systeme = ({ data: temp, id }) => {
 
   return (
     <>
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <h2>{data?.name_systeme}</h2>
+      <div className='bg-cultured p-4 rounded-2'>
+        <div className='flex items-center'>
+          <h2 className='text-base'>{data?.name_systeme}</h2>
           <Link href={`/systeme-list/${id}/update`}>
-            <EditIcon />
+            <EditIcon className='ml-2 cursor-pointer' color="primary" />
           </Link>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: data?.desc_systeme }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.desc_systeme }} className='max-w-[830px]' />
         <Button
           color="error"
           variant="contained"

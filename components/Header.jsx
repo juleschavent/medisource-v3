@@ -4,17 +4,13 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <section
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
+    <section className='flex items-center justify-center py-12 bg-blue rounded-br-22'>
       <Link href="/">
-        <HomeIcon />
+        <HomeIcon className='text-2xl text-white mr-2 cursor-pointer' />
+      </Link >
+      <Link href="/">
+        <span className='text-2xl font-semibold text-white cursor-pointer'>Medisource</span>
       </Link>
-      <h1 className={styles.title}>Medisource</h1>
-    </section>
+    </section >
   );
 }

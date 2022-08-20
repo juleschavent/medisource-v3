@@ -1,39 +1,11 @@
 import { server } from '../../config';
-import Link from 'next/link';
-import { MenuItem, Select } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useMemo } from 'react';
-import { useOrderByName } from '../../lib/UseOrderByName';
+import { MsSelect } from '../../components/MsSelect';
+import { ESelectTypes } from '../../lib/types';
 
 const MaladieList = ({ data }) => {
 
-  const orderedList = useMemo(() => (
-    useOrderByName(data, 'name_maladie')
-  ), [data])
-
-
   return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Select label="Maladie" value="none">
-          <MenuItem value={'none'}>Sélectionner une maladie</MenuItem>
-          {data &&
-            orderedList.map((maladie) => (
-              <Link
-                key={maladie.id_maladie}
-                href={`/maladie-list/${maladie.id_maladie}`}
-              >
-                <MenuItem value={maladie.id_maladie}>
-                  {maladie.name_maladie}
-                </MenuItem>
-              </Link>
-            ))}
-        </Select>
-        <Link href="/maladie-list/create">
-          <AddCircleIcon />
-        </Link>
-      </div>
-    </div>
+    <MsSelect list={data} type={ESelectTypes.MALADIE} />
   );
 };
 
