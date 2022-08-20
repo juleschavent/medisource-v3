@@ -1,17 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { server } from '../config';
 
-export default function MaladieMultipleSelect({ list, setHasMaladie }) {
+export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
   const [tempMaladie, setTempMaladie] = useState([]);
+  const [currMaladie, setCurrMaladie] = useState([]);
+
+  useEffect(() => {
+    fetch(`${server}/api/traitement-has-maladie/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCurrMaladie(data));
+  }, [])
 
   useEffect(() => {
     const arr = [];
-    list?.forEach((el) => {
+    currMaladie?.forEach((el) => {
       arr.push(el.name_maladie);
     });
     setTempMaladie(arr);
@@ -28,6 +36,16 @@ export default function MaladieMultipleSelect({ list, setHasMaladie }) {
     });
     setHasMaladie(result);
   }, [tempMaladie, list]);
+
+  const orderedList = useMemo(() => (
+    list?.sort((a, b) => {
+      const titleA = a.name_maladie.toLowerCase();
+      const titleB = b.name_maladie.toLowerCase();
+      if (titleA < titleB) {
+        return -1;
+      }
+      return (titleA > titleB) ? 1 : 0;
+    })), [list])
 
   const handleChange = (event) => {
     const {
@@ -49,13 +67,17 @@ export default function MaladieMultipleSelect({ list, setHasMaladie }) {
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
+            {selected.map((value) => {
+              return tempMaladie.map((maladie) => {
+                if (maladie === value) {
+                  return <Chip key={value} label={value} />
+                }
+              })
+            })}
           </Box>
         )}
       >
-        {list?.map((item) => (
+        {orderedList?.map((item) => (
           <MenuItem key={item.name_maladie} value={item.name_maladie}>
             {item.name_maladie}
           </MenuItem>

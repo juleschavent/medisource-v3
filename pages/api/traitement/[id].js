@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     const { name, desc, image } = req.body.newData;
     const id = req.query.id;
     const query =
-      'UPDATE `maladie` SET `id_maladie`= ?,`name_maladie`= ?,`desc_maladie`= ?,`image_maladie`= ? WHERE id_maladie = ?';
+      'UPDATE `traitement` SET `id_traitement`= ?,`name_traitement`= ?,`desc_traitement`= ?,`image_traitement`= ? WHERE id_traitement = ?';
     try {
       const result = await excuteQuery({
         query,

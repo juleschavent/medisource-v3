@@ -9,97 +9,51 @@ import { useRouter } from 'next/router';
 import { MenuItem, Select } from '@mui/material';
 import OrganeMultipleSelect from '../../../components/OrganeMultipleSelect';
 import TraitementMultipleSelect from '../../../components/TraitementMultipleSelect';
+import MaladieMultipleSelect from '../../../components/MaladieMultipleSelect';
 
-export default function SystemeUpdate({ data: temp }) {
+export default function TraitementUpdate({ data: temp }) {
   const router = useRouter();
   const data = temp[0];
-  const [name, setName] = useState(data?.name_maladie);
-  const [desc, setDesc] = useState(data?.desc_maladie);
+  const [name, setName] = useState(data?.name_traitement);
+  const [desc, setDesc] = useState(data?.desc_traitement);
   const [image, setImage] = useState(data?.image_maladie);
-  const [organeList, setOrganeList] = useState();
-  const [hasOrgane, setHasOrgane] = useState([]);
-  const [traitementList, setTraitementList] = useState();
-  const [hasTraitement, setHasTraitement] = useState([]);
+  const [maladieList, setMaladieList] = useState();
+  const [hasMaladie, setHasMaladie] = useState([]);
+
+  console.log(data);
 
   useEffect(() => {
-    fetch(`${server}/api/organe`)
+    fetch(`${server}/api/maladie`)
       .then((res) => res.json())
-      .then((data) => setOrganeList(data));
-    fetch(`${server}/api/traitement`)
-      .then((res) => res.json())
-      .then((data) => setTraitementList(data));
+      .then((data) => setMaladieList(data));
   }, []);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     const newData = {
-      id: data.id_maladie,
+      id: data.id_traitement,
       name,
       desc,
       image,
-      hasOrgane,
-      hasTraitement
+      hasMaladie
     };
-    // UPDATE MALADIE ONLY
-    await fetch(`${server}/api/maladie/${data.id_maladie}`, {
+    // UPDATE TRAITEMENT ONLY
+    await fetch(`${server}/api/traitement/${data.id_traitement}`, {
       method: 'PUT',
       body: JSON.stringify({ newData }),
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    // TODO DELETE ALL THE THEN
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('updated maladie')
-    //     : console.log('error update maladie');
-    // });
-
-    // DELETE ALL RELATION WITH ORGANE
-    await fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`, {
+    await fetch(`${server}/api/traitement-has-maladie/${data.id_traitement}`, {
       method: 'DELETE'
     });
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('deleted maladie relations')
-    //     : console.log('error: delete maladie relations');
-    // });
 
-    // CREATE NEW UPDATED ORGANE RELATION
-    hasOrgane.forEach(async (organe) => {
+    // CREATE NEW UPDATED MALADIE RELATION
+    hasMaladie.forEach(async (maladie) => {
       const joinData = {
-        maladieId: newData.id,
-        organeId: organe
-      };
-      await fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`, {
-        method: 'POST',
-        body: JSON.stringify({ joinData }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      // .then((response) => {
-      //   response.ok
-      //     ? console.log('create organe relation')
-      //     : console.log('error');
-      // });
-    });
-
-    // DELETE ALL RELATION WITH TRAITEMENT
-    await fetch(`${server}/api/traitement-has-maladie/${data.id_maladie}`, {
-      method: 'DELETE'
-    });
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('success: deleted traitement relations')
-    //     : console.log('error: delete traitement relations');
-    // });
-
-    // CREATE NEW UPDATED TRAITEMENT RELATION
-    hasTraitement.forEach(async (traitement) => {
-      const joinData = {
-        maladieId: newData.id,
-        traitementId: traitement
+        maladieId: maladie,
+        traitementId: newData.id
       };
       await fetch(`${server}/api/traitement-has-maladie/${data.id_maladie}`, {
         method: 'POST',
@@ -108,23 +62,15 @@ export default function SystemeUpdate({ data: temp }) {
           'Content-Type': 'application/json'
         }
       });
-      // .then((response) => {
-      //   response.ok
-      //     ? console.log('create traitement relation')
-      //     : console.log('error');
-      // });
     });
+
     router.back();
   };
 
   return (
     <div>
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <OrganeMultipleSelect list={organeList} setHasOrgane={setHasOrgane} />
-      <TraitementMultipleSelect
-        list={traitementList}
-        setHasTraitement={setHasTraitement}
-      />
+      <MaladieMultipleSelect list={maladieList} setHasMaladie={setHasMaladie} id={data.id_traitement} />
       <ReactQuill preserveWhitespace value={desc} onChange={setDesc} />
       <Button onClick={handleUpdate}>Save</Button>
       <Button onClick={() => router.back()} color="warning">
@@ -136,7 +82,7 @@ export default function SystemeUpdate({ data: temp }) {
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const res = await fetch(`${server}/api/maladie/${id}`);
+  const res = await fetch(`${server}/api/traitement/${id}`);
   const data = await res.json();
 
   if (!data) {

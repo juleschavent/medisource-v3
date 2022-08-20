@@ -8,7 +8,7 @@ import { server } from '../../../config';
 import { useRouter } from 'next/router';
 import { MenuItem, Select } from '@mui/material';
 
-export default function SystemeUpdate({ data: temp }) {
+export default function OrganeUpdate({ data: temp }) {
   const router = useRouter();
   const data = temp[0];
   const [name, setName] = useState(data?.name_organe);

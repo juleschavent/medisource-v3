@@ -2,15 +2,22 @@ import { server } from '../../config';
 import Link from 'next/link';
 import { MenuItem, Select } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useMemo } from 'react';
+import { useOrderByName } from '../../lib/UseOrderByName';
 
 const SystemeList = ({ data }) => {
+
+  const orderedList = useMemo(() => (
+    useOrderByName(data, "name_systeme")
+  ), [data])
+
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Select label="Systeme" value="none">
           <MenuItem value={'none'}>Sélectionner un système</MenuItem>
           {data &&
-            data.map((systeme) => (
+            orderedList.map((systeme) => (
               <Link
                 key={systeme.id_systeme}
                 href={`/systeme-list/${systeme.id_systeme}`}

@@ -51,7 +51,7 @@ const CreateTraitement = () => {
               };
               console.log(data);
               await fetch(
-                `${server}/api/maladie-has-traitement/${data[0].id_traitement}`,
+                `${server}/api/maladie-has-traitement/${data[0].id_maladie}`,
                 {
                   method: 'POST',
                   body: JSON.stringify({ joinData }),

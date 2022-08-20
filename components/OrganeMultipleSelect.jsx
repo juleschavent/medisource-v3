@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -7,17 +7,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { sortBy } from 'lodash';
+import { server } from '../config';
 
-export default function OrganeMultipleSelect({ list, setHasOrgane }) {
+export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
   const [tempOrgane, setTempOrgane] = useState([]);
+  const [currOrgane, setCurrOrgane] = useState([]);
+
+  useEffect(() => {
+    fetch(`${server}/api/maladie-has-organe/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCurrOrgane(data));
+  }, [])
 
   useEffect(() => {
     const arr = [];
-    list?.forEach((el) => {
+    currOrgane?.forEach((el) => {
       arr.push(el.name_organe);
     });
     setTempOrgane(arr);
-  }, [list]);
+  }, [currOrgane]);
 
   useEffect(() => {
     const result = [];
@@ -28,6 +37,16 @@ export default function OrganeMultipleSelect({ list, setHasOrgane }) {
     });
     setHasOrgane(result);
   }, [tempOrgane, list]);
+
+  const orderedList = useMemo(() => (
+    list?.sort((a, b) => {
+      const titleA = a.name_organe.toLowerCase();
+      const titleB = b.name_organe.toLowerCase();
+      if (titleA < titleB) {
+        return -1;
+      }
+      return (titleA > titleB) ? 1 : 0;
+    })), [list])
 
   const handleChange = (event) => {
     const {
@@ -49,13 +68,17 @@ export default function OrganeMultipleSelect({ list, setHasOrgane }) {
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
+            {selected.map((value) => {
+              return tempOrgane.map((organe) => {
+                if (organe === value) {
+                  return <Chip key={value} label={value} />
+                }
+              })
+            })}
           </Box>
         )}
       >
-        {list?.map((item) => (
+        {orderedList?.map((item) => (
           <MenuItem key={item.name_organe} value={item.name_organe}>
             {item.name_organe}
           </MenuItem>

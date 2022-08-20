@@ -1,17 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { server } from '../config';
 
-export default function TraitementMultipleSelect({ list, setHasTraitement }) {
+export default function TraitementMultipleSelect({ list, setHasTraitement, id }) {
   const [tempTraitement, setTempTraitement] = useState([]);
+  const [currTraitement, setCurrTraitement] = useState([]);
+
+  console.log(currTraitement);
+
+  useEffect(() => {
+    fetch(`${server}/api/maladie-has-traitement/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCurrTraitement(data));
+  }, [])
 
   useEffect(() => {
     const arr = [];
-    list?.forEach((el) => {
+    currTraitement?.forEach((el) => {
       arr.push(el.name_traitement);
     });
     setTempTraitement(arr);
@@ -28,6 +38,16 @@ export default function TraitementMultipleSelect({ list, setHasTraitement }) {
     });
     setHasTraitement(result);
   }, [tempTraitement, list]);
+
+  const orderedList = useMemo(() => (
+    list?.sort((a, b) => {
+      const titleA = a.name_traitement.toLowerCase();
+      const titleB = b.name_traitement.toLowerCase();
+      if (titleA < titleB) {
+        return -1;
+      }
+      return (titleA > titleB) ? 1 : 0;
+    })), [list])
 
   const handleChange = (event) => {
     const {
@@ -49,13 +69,17 @@ export default function TraitementMultipleSelect({ list, setHasTraitement }) {
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
+            {selected.map((value) => {
+              return tempTraitement.map((traitement) => {
+                if (traitement === value) {
+                  return <Chip key={value} label={value} />
+                }
+              })
+            })}
           </Box>
         )}
       >
-        {list?.map((item) => (
+        {orderedList?.map((item) => (
           <MenuItem key={item.name_traitement} value={item.name_traitement}>
             {item.name_traitement}
           </MenuItem>

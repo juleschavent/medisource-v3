@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       const id = req.query.id;
       const result = await excuteQuery({
         query:
-          'DELETE FROM `traitement_has_maladie` WHERE maladie_traitement = ?',
+          'DELETE FROM `traitement_has_maladie` WHERE traitement_maladie = ?',
         values: id
       });
       res.status(200).json(result);

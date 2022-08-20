@@ -25,6 +25,10 @@ export default function SystemeUpdate({ data: temp }) {
     fetch(`${server}/api/organe`)
       .then((res) => res.json())
       .then((data) => setOrganeList(data));
+    // fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`)
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
+
     fetch(`${server}/api/traitement`)
       .then((res) => res.json())
       .then((data) => setTraitementList(data));
@@ -48,22 +52,11 @@ export default function SystemeUpdate({ data: temp }) {
         'Content-Type': 'application/json'
       }
     });
-    // TODO DELETE ALL THE THEN
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('updated maladie')
-    //     : console.log('error update maladie');
-    // });
 
     // DELETE ALL RELATION WITH ORGANE
     await fetch(`${server}/api/maladie-has-organe/${data.id_maladie}`, {
       method: 'DELETE'
     });
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('deleted maladie relations')
-    //     : console.log('error: delete maladie relations');
-    // });
 
     // CREATE NEW UPDATED ORGANE RELATION
     hasOrgane.forEach(async (organe) => {
@@ -78,22 +71,12 @@ export default function SystemeUpdate({ data: temp }) {
           'Content-Type': 'application/json'
         }
       });
-      // .then((response) => {
-      //   response.ok
-      //     ? console.log('create organe relation')
-      //     : console.log('error');
-      // });
     });
 
     // DELETE ALL RELATION WITH TRAITEMENT
-    await fetch(`${server}/api/traitement-has-maladie/${data.id_maladie}`, {
+    await fetch(`${server}/api/maladie-has-traitement/${data.id_maladie}`, {
       method: 'DELETE'
     });
-    // .then((response) => {
-    //   response.ok
-    //     ? console.log('success: deleted traitement relations')
-    //     : console.log('error: delete traitement relations');
-    // });
 
     // CREATE NEW UPDATED TRAITEMENT RELATION
     hasTraitement.forEach(async (traitement) => {
@@ -108,11 +91,6 @@ export default function SystemeUpdate({ data: temp }) {
           'Content-Type': 'application/json'
         }
       });
-      // .then((response) => {
-      //   response.ok
-      //     ? console.log('create traitement relation')
-      //     : console.log('error');
-      // });
     });
     router.back();
   };
@@ -120,10 +98,11 @@ export default function SystemeUpdate({ data: temp }) {
   return (
     <div>
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <OrganeMultipleSelect list={organeList} setHasOrgane={setHasOrgane} />
+      <OrganeMultipleSelect list={organeList} setHasOrgane={setHasOrgane} id={data.id_maladie} />
       <TraitementMultipleSelect
         list={traitementList}
         setHasTraitement={setHasTraitement}
+        id={data.id_maladie}
       />
       <ReactQuill preserveWhitespace value={desc} onChange={setDesc} />
       <Button onClick={handleUpdate}>Save</Button>
