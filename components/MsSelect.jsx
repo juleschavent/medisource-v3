@@ -36,12 +36,10 @@ export const MsSelect = ({ list, type }) => {
   return (
     <div className='flex items-center mx-auto w-fit-content'>
       <CustomSelect value="none">
-        <MenuItem value="none" sx={{ fontSize: '1.8rem' }}>{defaultValue}</MenuItem>
+        <MsMenuItem value="none" sx={{ fontSize: '1.8rem' }}>{defaultValue}</MsMenuItem>
         {orderedList?.map((item) => (
-
-          <MsMenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }}>
+          <MsMenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }} key={item[`id_${type}`]}>
             <Link
-              key={item[`id_${type}`]}
               href={`/${type}-list/${item[`id_${type}`]}`}
             >
               {item[`name_${type}`]}

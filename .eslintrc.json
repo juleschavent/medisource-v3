@@ -6,7 +6,6 @@
     "extends": [
         "plugin:react/recommended"
     ],
-    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -16,7 +15,6 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
         "formatjs"
     ],
     "rules": {
@@ -25,9 +23,6 @@
         "no-undef": "off",
         "react/jsx-props-no-spreading": "off",
         "no-shadow": "off",
-        "@typescript-eslint/no-shadow": [
-            "error"
-        ],
         "no-unused-vars": "warn",
         "camelcase": "warn",
         "func-call-spacing": "off",
@@ -50,9 +45,6 @@
         ],
         "react/button-has-type": "off",
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": [
-            "error"
-        ],
         "nonblock-statement-body-position": "off",
         "import/extensions": [
             "error",

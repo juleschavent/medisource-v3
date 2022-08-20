@@ -4,7 +4,14 @@ import { basicsColors } from "../pages/assets/colors"
 const CustomMenuItem = styled(MenuItem)`
   font-size: 1.8rem;
   border: none;
-  background-color: ${basicsColors.cultured};
+  margin: 0 10px;
+  border-radius: 1rem;
+
+  // > a {
+  //   padding: 15px;
+  //   width: 100%;
+  //   background-color: ${basicsColors.cultured}
+  // }
 `
 
 
