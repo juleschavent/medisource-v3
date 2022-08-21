@@ -9,5 +9,5 @@ export async function updateSysteme(data) {
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  });
 }

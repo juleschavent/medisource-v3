@@ -6,5 +6,5 @@ export const useOrderByName = (arr, value) => {
       return -1;
     }
     return (titleA > titleB) ? 1 : 0;
-  })
-}
+  });
+};

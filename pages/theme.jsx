@@ -14,7 +14,7 @@ import {
   warningColor,
 } from './assets/colors';
 
-const themeOptions: ThemeOptions = {
+const themeOptions = {
   palette: {
     mode: 'light',
     primary: {
