@@ -16,7 +16,7 @@ export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
     fetch(`${server}/api/traitement-has-maladie/${id}`)
       .then((res) => res.json())
       .then((data) => setCurrMaladie(data));
-  }, [])
+  }, []);
 
   useEffect(() => {
     const arr = [];
@@ -40,7 +40,7 @@ export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
 
   const orderedList = useMemo(() => (
     useOrderByName(list, 'name_maladie')
-  ), [list])
+  ), [list]);
 
   const handleChange = (event) => {
     const {
@@ -65,9 +65,9 @@ export default function MaladieMultipleSelect({ list, setHasMaladie, id }) {
             {selected.map((value) => {
               return tempMaladie.map((maladie) => {
                 if (maladie === value) {
-                  return <Chip key={value} label={value} />
+                  return <Chip key={value} label={value} />;
                 }
-              })
+              });
             })}
           </Box>
         )}

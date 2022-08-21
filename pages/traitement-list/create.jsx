@@ -19,7 +19,7 @@ const CreateTraitement = () => {
   useEffect(() => {
     fetch(`${server}/api/maladie`)
       .then((res) => res.json())
-      .then((data) => setMaladieList(data))
+      .then((data) => setMaladieList(data));
   }, []);
 
   const handleUpdate = async (e) => {
@@ -54,13 +54,13 @@ const CreateTraitement = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              )
-            })
+              );
+            });
             setTimeout(() => {
-              router.push(`/traitement-list/${data[0].id_traitement}`)
-            }, 1000)
+              router.push(`/traitement-list/${data[0].id_traitement}`);
+            }, 1000);
           })
-      )
+      );
   };
 
   return (

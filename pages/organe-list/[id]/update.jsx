@@ -48,7 +48,7 @@ export default function OrganeUpdate({ data: temp }) {
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Select
         label="Systeme"
-        defaultValue={data?.systeme_organe || ""}
+        defaultValue={data?.systeme_organe || ''}
         onChange={(e) => setSysteme(e.target.value)}
       >
         {systemeList?.map((systeme) => (

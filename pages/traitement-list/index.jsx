@@ -11,7 +11,7 @@ const TraitementList = ({ data }) => {
 
   const orderedList = useMemo(() => (
     useOrderByName(data, 'name_traitement')
-  ), [data])
+  ), [data]);
 
 
   return (

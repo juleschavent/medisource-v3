@@ -18,7 +18,7 @@ export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
     fetch(`${server}/api/maladie-has-organe/${id}`)
       .then((res) => res.json())
       .then((data) => setCurrOrgane(data));
-  }, [])
+  }, []);
 
   useEffect(() => {
     const arr = [];
@@ -40,7 +40,7 @@ export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
 
   const orderedList = useMemo(() => (
     useOrderByName(list, 'name_organe')
-  ), [list])
+  ), [list]);
 
   const handleChange = (event) => {
     const {
@@ -65,9 +65,9 @@ export default function OrganeMultipleSelect({ list, setHasOrgane, id }) {
             {selected.map((value) => {
               return tempOrgane.map((organe) => {
                 if (organe === value) {
-                  return <Chip key={value} label={value} />
+                  return <Chip key={value} label={value} />;
                 }
-              })
+              });
             })}
           </Box>
         )}

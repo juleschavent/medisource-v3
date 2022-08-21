@@ -23,10 +23,10 @@ const CreateOrgane = () => {
   useEffect(() => {
     fetch(`${server}/api/organe`)
       .then((res) => res.json())
-      .then((data) => setOrganeList(data))
+      .then((data) => setOrganeList(data));
     fetch(`${server}/api/traitement`)
       .then((res) => res.json())
-      .then((data) => setTraitementList(data))
+      .then((data) => setTraitementList(data));
   }, []);
 
   const handleUpdate = async (e) => {
@@ -62,8 +62,8 @@ const CreateOrgane = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              )
-            })
+              );
+            });
             // INSERT INTO TRAITEMENT HAS MALADIE
             hasTraitement.forEach(async (traitement) => {
               const joinData = {
@@ -79,13 +79,13 @@ const CreateOrgane = () => {
                     'Content-Type': 'application/json'
                   }
                 }
-              )
-            })
+              );
+            });
             setTimeout(() => {
-              router.push(`/maladie-list/${data[0].id_maladie}`)
-            }, 1000)
+              router.push(`/maladie-list/${data[0].id_maladie}`);
+            }, 1000);
           })
-      )
+      );
   };
 
   return (

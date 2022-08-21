@@ -39,7 +39,7 @@ const CreateOrgane = () => {
     })
       .then((response) => response.json())
       .then((data) => router.push(`/organe-list/${data.insertId}`))
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   return (

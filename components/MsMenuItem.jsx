@@ -1,5 +1,5 @@
-import { MenuItem, styled } from "@mui/material"
-import { basicsColors } from "../pages/assets/colors"
+import { MenuItem, styled } from '@mui/material';
+import { basicsColors } from '../pages/assets/colors';
 
 const CustomMenuItem = styled(MenuItem)`
   font-size: 1.8rem;
@@ -12,7 +12,7 @@ const CustomMenuItem = styled(MenuItem)`
   //   width: 100%;
   //   background-color: ${basicsColors.cultured}
   // }
-`
+`;
 
 
 export const MsMenuItem = ({ children, value }) => {
@@ -22,5 +22,5 @@ export const MsMenuItem = ({ children, value }) => {
     <CustomMenuItem value={value} sx={{ fontSize: '1.8rem' }}>
       {children}
     </CustomMenuItem>
-  )
-}
+  );
+};

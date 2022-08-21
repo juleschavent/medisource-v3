@@ -15,8 +15,8 @@ const Organe = ({ data: temp, id }) => {
   useEffect(() => {
     fetch(`${server}/api/systeme/${data.systeme_organe}`)
       .then((response) => response.json())
-      .then((res) => setSysteme(res))
-  }, [data])
+      .then((res) => setSysteme(res));
+  }, [data]);
 
   return (
     <>

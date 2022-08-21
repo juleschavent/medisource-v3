@@ -1,37 +1,37 @@
-import { MenuItem, Select, styled } from "@mui/material"
-import Link from "next/link"
+import { MenuItem, Select, styled } from '@mui/material';
+import Link from 'next/link';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useMemo } from "react";
-import { useOrderByName } from "../lib/UseOrderByName";
-import { ESelectTypes } from "../lib/types";
-import { basicsColors } from "../pages/assets/colors"
-import { MsMenuItem } from "./MsMenuItem";
+import { useMemo } from 'react';
+import { useOrderByName } from '../lib/UseOrderByName';
+import { ESelectTypes } from '../lib/types';
+import { basicsColors } from '../pages/assets/colors';
+import { MsMenuItem } from './MsMenuItem';
 
 const CustomSelect = styled(Select)`
   font-size: 1.8rem;
   border: none;
   background-color: ${basicsColors.cultured};
-`
+`;
 
 
 export const MsSelect = ({ list, type }) => {
 
   const orderedList = useMemo(() => (
     useOrderByName(list, `name_${type}`)
-  ), [list])
+  ), [list]);
 
   const defaultValue = useMemo(() => {
     switch (type) {
-      case ESelectTypes.SYSTEME:
-        return 'Selectionnez un système'
-      case ESelectTypes.ORGANE:
-        return 'Selectionnez un organe'
-      case ESelectTypes.MALADIE:
-        return 'Selectionnez une maladie'
-      case ESelectTypes.TRAITEMENT:
-        return 'Selectionnez un traitement'
+    case ESelectTypes.SYSTEME:
+      return 'Selectionnez un système';
+    case ESelectTypes.ORGANE:
+      return 'Selectionnez un organe';
+    case ESelectTypes.MALADIE:
+      return 'Selectionnez une maladie';
+    case ESelectTypes.TRAITEMENT:
+      return 'Selectionnez un traitement';
     }
-  }, [type])
+  }, [type]);
 
   return (
     <div className='flex items-center mx-auto w-fit-content'>
@@ -51,5 +51,5 @@ export const MsSelect = ({ list, type }) => {
         <AddCircleIcon className='ml-1 cursor-pointer' color='primary' />
       </Link>
     </div>
-  )
-}
+  );
+};
