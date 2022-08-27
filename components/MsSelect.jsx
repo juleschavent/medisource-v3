@@ -4,7 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useMemo } from 'react';
 import { useOrderByName } from '../lib/UseOrderByName';
 import { ESelectTypes } from '../lib/types';
-import { basicsColors } from '../pages/assets/colors';
+import { basicsColors } from '/assets/colors';
 import { MsMenuItem } from './MsMenuItem';
 
 const CustomSelect = styled(Select)`

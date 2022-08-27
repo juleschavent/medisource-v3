@@ -1,5 +1,5 @@
 import { MenuItem, styled } from '@mui/material';
-import { basicsColors } from '../pages/assets/colors';
+import { basicsColors } from '/assets/colors';
 
 const CustomMenuItem = styled(MenuItem)`
   font-size: 1.8rem;
