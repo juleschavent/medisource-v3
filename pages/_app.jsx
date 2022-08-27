@@ -1,7 +1,7 @@
 import { Container } from '@mui/system';
 import { useMemo } from 'react';
 import Header from '../components/Header';
-import { useUserData } from '../lib/temp';
+import { useUserData } from '../lib/UseUserData';
 import '../styles/globals.scss';
 import Enter from './enter';
 

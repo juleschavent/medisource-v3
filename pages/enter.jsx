@@ -1,11 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../context/authContext';
 import { auth, firestore, googleAuthProvider } from '/lib/firebase';
+import LoginIcon from '@mui/icons-material/Login';
+import { Button } from '@mui/material';
 
 export default function Enter() {
   const { user } = useContext(UserContext);
   return (
-    <div>
+    <div className='w-full h-full flex items-center justify-center'>
       {
         user ? <SignOutButton /> : <SignInButton />
       }
@@ -19,9 +21,15 @@ function SignInButton() {
   };
 
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      <img src={'/google.png'} width="30px" /> Sign in with Google
-    </button>
+    <Button 
+      className="flex items-center border-none px-4 py-2 rounded-2 cursor-pointer"
+      onClick={signInWithGoogle}
+      variant="contained"
+      disableElevation
+    >
+      <LoginIcon className='mr-4 text-xl' />
+      <span className='text-base'>Sign in with Google</span>
+    </Button>
   );
 }
 
