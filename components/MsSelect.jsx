@@ -14,7 +14,9 @@ const CustomSelect = styled(Select)`
 `;
 
 
-export const MsSelect = ({ list, type }) => {
+export const MsSelect = ({
+  list, type 
+}) => {
 
   const orderedList = useMemo(() => (
     useOrderByName(list, `name_${type}`)
@@ -36,9 +38,19 @@ export const MsSelect = ({ list, type }) => {
   return (
     <div className='flex items-center mx-auto w-fit-content'>
       <CustomSelect value="none">
-        <MsMenuItem value="none" sx={{ fontSize: '1.8rem' }}>{defaultValue}</MsMenuItem>
+        <MsMenuItem value="none" sx={{
+          fontSize: '1.8rem' 
+        }}>
+          {defaultValue}
+        </MsMenuItem>
         {orderedList?.map((item) => (
-          <MsMenuItem value={item[`id_${type}`]} sx={{ fontSize: '1.8rem' }} key={item[`id_${type}`]}>
+          <MsMenuItem 
+            value={item[`id_${type}`]} 
+            sx={{
+              fontSize: '1.8rem' 
+            }} 
+            key={item[`id_${type}`]}
+          >
             <Link
               href={`/${type}-list/${item[`id_${type}`]}`}
             >
@@ -48,7 +60,7 @@ export const MsSelect = ({ list, type }) => {
         ))}
       </CustomSelect>
       <Link href={`/${type}-list/create`}>
-        <AddCircleIcon className='ml-1 cursor-pointer' color='primary' />
+        <AddCircleIcon className='ml-1 cursor-pointer text-xl' color='primary' />
       </Link>
     </div>
   );

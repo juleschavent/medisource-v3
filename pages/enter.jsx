@@ -27,7 +27,7 @@ function SignInButton() {
       variant="contained"
       disableElevation
     >
-      <LoginIcon className='mr-4 text-xl' />
+      <LoginIcon className='mr-4 !text-xl' />
       <span className='text-base'>Sign in with Google</span>
     </Button>
   );

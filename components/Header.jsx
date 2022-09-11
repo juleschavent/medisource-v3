@@ -16,7 +16,7 @@ export default function Header() {
         </Link>
       </div>
       <Button onClick={() => auth.signOut()}>
-        <LogoutIcon className='text-xl text-white'/>
+        <LogoutIcon className='!text-xl text-white'/>
       </Button>
     </section >
   );

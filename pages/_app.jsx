@@ -5,7 +5,9 @@ import { useUserData } from '../lib/UseUserData';
 import '../styles/globals.scss';
 import Enter from './enter';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+  Component, pageProps 
+}) {
   const userData = useUserData();
 
   const isAllowed = useMemo(() => {
