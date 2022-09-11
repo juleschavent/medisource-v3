@@ -60,7 +60,11 @@ export const MsSelect = ({
         ))}
       </CustomSelect>
       <Link href={`/${type}-list/create`}>
-        <AddCircleIcon className='ml-1 cursor-pointer text-xl' color='primary' />
+        <AddCircleIcon 
+          className='ml-1 cursor-pointer' 
+          color='primary'
+          style={{ fontSize: '2rem'}}
+        />
       </Link>
     </div>
   );

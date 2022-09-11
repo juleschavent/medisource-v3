@@ -14,10 +14,7 @@ module.exports = {
     'sourceType': 'module'
   },
   'plugins': [
-    'react', 
-    'postcss-import',
-    'tailwindcss',
-    'autoprefixer'
+    'react',
   ],
   'rules': {
     'react/prop-types': 0,
