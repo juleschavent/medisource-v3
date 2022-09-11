@@ -13,7 +13,12 @@ module.exports = {
     'ecmaVersion': 'latest',
     'sourceType': 'module'
   },
-  'plugins': ['react'],
+  'plugins': [
+    'react', 
+    'postcss-import',
+    'tailwindcss',
+    'autoprefixer'
+  ],
   'rules': {
     'react/prop-types': 0,
     'quotes': [
