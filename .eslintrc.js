@@ -5,7 +5,8 @@ module.exports = {
   },
   'extends': [
     'plugin:react/recommended',
-    'plugin:react/jsx-runtime'
+    'plugin:react/jsx-runtime',
+    'plugin:@next/next/recommended',
   ],
   'overrides': [],
   'parserOptions': {
@@ -35,20 +36,20 @@ module.exports = {
       'allow': 'single-child'
     }],
     'operator-linebreak': 'off',
-    'object-curly-newline': [
-      'error',
-      {
-        'ObjectExpression': 'always',
-        'ObjectPattern': {
-          'multiline': true,
-          'minProperties': 2
-        },
-        'ImportDeclaration': 'never',
-        'ExportDeclaration': {
-          'multiline': true,
-          'minProperties': 2
-        }
-      }
-    ],
+    // 'object-curly-newline': [
+    //   'error',
+    //   {
+    //     'ObjectExpression': 'always',
+    //     'ObjectPattern': {
+    //       'multiline': true,
+    //       'minProperties': 3
+    //     },
+    //     'ImportDeclaration': 'never',
+    //     'ExportDeclaration': {
+    //       'multiline': true,
+    //       'minProperties': 3
+    //     }
+    //   }
+    // ],
   }
 };
