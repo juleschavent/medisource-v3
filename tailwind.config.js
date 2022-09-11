@@ -225,7 +225,11 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    'postcss-import',
+    'tailwindcss',
+    'autoprefixer',
+  ],
   corePlugins: {
     preflight: false,
   },
